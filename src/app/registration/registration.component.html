@@ -1,0 +1,57 @@
+<!-- <div>{{ appState$ | async | json }}</div> -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="container-xl">
+  <div class="table-responsive">
+      <div class="table-wrapper">
+          <div class="table-title">
+              <div class="row">
+                  <div class="col-sm-6">
+                      <h2>Manage Users</h2>
+                  </div>
+                  <div class="col-sm-6">
+                      <button type="button" class="btn btn-primary">Print Report</button>
+
+                      <a routerLink="/registration/add" class="btn btn-success" data-toggle="modal">
+                          <i class="material-icons">&#xE147;</i>
+                          <span>New User</span>
+                      </a>
+                  </div>
+              </div>
+          </div> <br>
+          <ng-container >
+              <ng-container >
+                  <table class="table table-striped table-hover" id="servers">
+                      <thead>
+                          <tr>
+                              <th scope="col">First Name</th>
+                              <th>Last Name</th>
+                              <th>Email</th>
+                              <th>Role</th>
+                              <th>Status</th>
+                              <th>Actions</th>
+                          </tr>
+                      </thead>
+                      <tbody *ngFor="let appUser of appUsers" >
+                          <tr>
+                              <td>{{ appUser.FirstName }}</td>
+                              <td>{{ appUser.LastName }}</td>
+                              <td>{{ appUser.email }}</td>
+                              <td>{{ appUser.appUserRoles }}</td>
+                              <td>
+                                  <span class="badge"
+                                  [ngClass]="[appUser.enabled === isEnabled ? ' badge-success' : ' badge-danger']">
+                                    {{ appUser.enabled === isEnabled ? 'enabled' : 'disabled' }}
+                                  </span>
+                              </td>
+                              <td>
+                                  <a (click)="deleteAppUser(appUser.id)" class="delete" data-toggle="modal"
+                                      style="cursor: pointer;"><i class="material-icons" data-toggle="tooltip"
+                                          title="Delete">&#xE872;</i></a>
+                              </td>
+                      </tbody>
+                  </table>
+              </ng-container>
+          </ng-container>
+      </div>
+  </div>
+</div>
