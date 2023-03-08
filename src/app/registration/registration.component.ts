@@ -11,6 +11,7 @@ import { AppUserService } from '../servicre/appUser.service';
 export class RegistrationComponent implements OnInit{
 
 
+
   isEnabled:boolean=true;
   appUsers: AppUser[];
   appUser: AppUser;
@@ -26,16 +27,53 @@ export class RegistrationComponent implements OnInit{
       this.appUsers = appUsers;
     });
   }
+
+
+
   public onAddAppUser(addForm:NgForm):void{
     this.appUserService.addAppUser(addForm.value).subscribe((appUser: AppUser) => {
       this.loadAppUsers();
       this.appUser = {} as AppUser;
-    });
+
+
+    } ,
+    (error) => {
+        if (error.status === 400) {
+            alert("Email already exists.");
+
+        }
+    }
+    );
+    addForm.resetForm();
+
   }
+
   deleteAppUser(id: number): void {
     this.appUserService.deleteAppUser(id).subscribe(() => {
       this.loadAppUsers();
     });
   }
+
+
+
+
+  printReport(format: string) {
+    if (format === 'pdf') {
+      window.print();
+    } else if (format === 'excel'){
+      let dataType = 'application/vnd.ms-excel.sheet.macroEnabled.12';
+    let tableSelect = document.getElementById('users');
+    let tableHtml = tableSelect.outerHTML.replace(/ /g, '%20');
+    let downloadLink = document.createElement('a');
+    document.body.appendChild(downloadLink);
+    downloadLink.href = 'data:' + dataType + ', ' + tableHtml;
+    downloadLink.download = 'users-report.xls';
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+
+    }
+
+  }
+
 
 }

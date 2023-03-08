@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppUserRole } from '../enum/appUserRole.enum';
-import { AppUser } from '../interface/appUser';
+import { AppUserDTO } from '../interface/app-user-dto';
 import { LoginService } from '../servicre/login.service';
 import { User } from './User';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,7 +12,7 @@ import { User } from './User';
 export class LoginComponent implements OnInit {
   errorMessage:string ="hh";
   user: User=new User();
-  appUser:AppUser;
+  appUserDTO:AppUserDTO;
 
   constructor(private loginservice:LoginService,private router: Router){}
   ngOnInit(): void {
@@ -21,15 +20,53 @@ export class LoginComponent implements OnInit {
   }
 
 
+  /*loginUser(): void {
+    this.loginservice.loginUser(this.user).subscribe(
+      (appUserDTO: AppUserDTO) => {
+        this.appUserDTO = appUserDTO;
+
+        if(this.appUserDTO.role === "RESPONSABLE") {
+          this.router.navigate(['/dashboard']);
+        } else {
+          alert("you are not a reponsable");
+        }
+      },
+      error => {
+        console.log(error);
+      }
+
+    );
+  }*/
   loginUser(): void {
     this.loginservice.loginUser(this.user).subscribe(
-      (appUser: AppUser) => {
-        this.appUser = appUser;
-        alert("succesfull")
-      },
-      (error) => console.log(error)
-    );
-  }
+      (appUserDTO: AppUserDTO) => {
+        this.appUserDTO = appUserDTO;
 
 
+        if(this.appUserDTO.reponse === "RESPONSABLE") {
+          this.router.navigate(['/dashboard']);
+
+        } else if(this.appUserDTO.reponse==="password"){
+          alert("password incorrect");
+          console.log(appUserDTO);
+        }else if(this.appUserDTO.reponse==="disabled"){
+          alert("enable your account");
+          console.log(appUserDTO);
+
+        }
+       },(error)=>{
+          if(error.status===500){
+
+            alert("email does not exist");
+          }
+       }
+       );
+
+
+
+
+
+
+
+}
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AppUser } from '../interface/appUser';
+import { AppUserDTO } from '../interface/app-user-dto';
 import { User } from '../login/User';
 
 @Injectable({
@@ -12,7 +12,10 @@ export class LoginService {
 
   constructor(private http: HttpClient){}
 
-  public loginUser(user:User): Observable<AppUser> {
-    return this.http.post<AppUser>(`${this.apiServerUrl}/registration/login`,user);
+  public loginUser(user:User): Observable<AppUserDTO> {
+    return this.http.post<AppUserDTO>(`${this.apiServerUrl}/registration/login`,user);
   }
+
+
 }
+

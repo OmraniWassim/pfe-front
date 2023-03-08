@@ -20,6 +20,7 @@ export class AppUserService {
     return this.http.post<AppUser>(`${this.apiServerUrl}/registration/add`,appUser);
   }
 
+
   public updateAppUser(id:number,appUser:AppUser): Observable<void> {
     return this.http.put<void>(`${this.apiServerUrl}/registration/add/${id}`,appUser);
   }
