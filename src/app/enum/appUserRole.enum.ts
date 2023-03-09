@@ -1,3 +1,3 @@
 export enum AppUserRole{
-  ALL = "ALL", Responsabe="Responsable",RH="RH"
+  ALL = "ALL", RESPONSABLE="RESPONSABLe",RH="RH",psmanager="psmanager"
 }
