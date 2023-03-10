@@ -3,7 +3,6 @@
       <div class="header">
           <h1>LTMS</h1>
       </div>
-      <div class="text-danger" *ngif="errorMessage">{{errorMessage}}</div>
       <div class="main">
           <form (ngSubmit)="loginUser()">
               <span>
@@ -14,7 +13,7 @@
                   <i class="fa fa-eye-slash" aria-hidden="true"></i>
                   <input type="password" [(ngModel)]="user.password" id="password" placeholder="Mot de passe" name="password">
               </span><br>
-                  <button type="submit"(click)="loginUser()">LOGIN</button>
+                  <button type="submit">LOGIN</button>
 
           </form>
 

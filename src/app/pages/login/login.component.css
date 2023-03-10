@@ -1,6 +1,9 @@
+
+@import url('http://netdna.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
+
 body {
 	font-family: sans-serif;
-	background-image: url("src/assets/celaya.jpg");
+	background-image: url("src/assets/images/celaya.jpg");
 	background-repeat: no-repeat;
 	overflow: hidden;
 	background-size: 100% 100%;

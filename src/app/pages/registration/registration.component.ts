@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AppUser } from '../interface/appUser';
-import { AppUserService } from '../servicre/appUser.service';
+import { ToastrService } from 'ngx-toastr';
+import { AppUser } from '../../interface/appUser';
+import { AppUserService } from '../../service/appUser.service';
 
 @Component({
   selector: 'app-registration',
@@ -15,7 +16,7 @@ export class RegistrationComponent implements OnInit{
   isEnabled:boolean=true;
   appUsers: AppUser[];
   appUser: AppUser;
-  constructor(private appUserService:AppUserService) {}
+  constructor(private appUserService:AppUserService,private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.loadAppUsers();
@@ -35,12 +36,14 @@ export class RegistrationComponent implements OnInit{
       this.loadAppUsers();
       this.appUser = {} as AppUser;
 
-
+      
     } ,
     (error) => {
         if (error.status === 400) {
-            alert("Email already exists.");
+          this.toastr.error("email deja existe");
 
+        }else{
+          this.toastr.success("success");
         }
     }
     );
