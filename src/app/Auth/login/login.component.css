@@ -32,12 +32,12 @@ body {
 	color: #474141;
 }
 
-.header {
+.head {
 	text-align: center;
 	padding-top: 75px;
 }
 
-.header h1 {
+.head h1 {
 	color: #4882B6;
     font-family: Franklin Gothic Heavy , sans-serif;
 	font-size: 61.5px;

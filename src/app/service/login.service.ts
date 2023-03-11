@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { AppUserDTO } from '../interface/app-user-dto';
-import { User } from '../pages/login/User';
+import { User } from '../Auth/login/User';
 
 @Injectable({
   providedIn: 'root'
