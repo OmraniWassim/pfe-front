@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AppUserRole } from '../enum/appUserRole.enum';
 import { AppUserDTO } from '../interface/app-user-dto';
 import { LoginService } from '../servicre/login.service';
@@ -14,29 +15,13 @@ export class LoginComponent implements OnInit {
   user: User=new User();
   appUserDTO:AppUserDTO;
 
-  constructor(private loginservice:LoginService,private router: Router){}
+  constructor(private loginservice:LoginService,private router: Router,private toastr:ToastrService){}
   ngOnInit(): void {
 
   }
 
 
-  /*loginUser(): void {
-    this.loginservice.loginUser(this.user).subscribe(
-      (appUserDTO: AppUserDTO) => {
-        this.appUserDTO = appUserDTO;
 
-        if(this.appUserDTO.role === "RESPONSABLE") {
-          this.router.navigate(['/dashboard']);
-        } else {
-          alert("you are not a reponsable");
-        }
-      },
-      error => {
-        console.log(error);
-      }
-
-    );
-  }*/
   loginUser(): void {
     this.loginservice.loginUser(this.user).subscribe(
       (appUserDTO: AppUserDTO) => {
@@ -48,16 +33,16 @@ export class LoginComponent implements OnInit {
 
         } else if(this.appUserDTO.reponse==="password"){
           alert("password incorrect");
-          console.log(appUserDTO);
+
         }else if(this.appUserDTO.reponse==="disabled"){
           alert("enable your account");
-          console.log(appUserDTO);
+
 
         }
        },(error)=>{
           if(error.status===500){
 
-            alert("email does not exist");
+           this.toastr.error("does not exist");
           }
        }
        );

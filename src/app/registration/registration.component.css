@@ -199,6 +199,7 @@ table.table .avatar {
   z-index: 2;
 }
 
+
 .custom-checkbox input[type="checkbox"]:checked+label:after {
   content: '';
   position: absolute;
