@@ -61,6 +61,10 @@ const routes: Routes = [
     path:'menu',
   component:MenuComponent
 },
+{
+path:'ps',
+component:PlantSectionComponent
+},
 
 { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
