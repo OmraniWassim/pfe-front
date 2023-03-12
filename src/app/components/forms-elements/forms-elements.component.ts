@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { ps } from 'src/app/components/forms-elements/ps';
 import { PSService } from 'src/app/service/ps.service';
 import { manager } from './manager';
@@ -14,10 +16,12 @@ export class FormsElementsComponent implements OnInit {
   Managers: manager[]
   
   PS : ps[]
+  psM : ps;
 
 
   constructor(private PsService:PSService,
-    private http:HttpClient) { }
+    private http:HttpClient,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loadps()
@@ -43,4 +47,22 @@ export class FormsElementsComponent implements OnInit {
     });
   }
 
+  public onAddpsM(addForm:NgForm):void{
+    this.PsService.addps(addForm.value).subscribe((psM: ps) => {
+      this.loadps();
+      this.psM = {} as ps;
+
+      
+    } 
+    ,
+    (error) => {
+        if (error.status === 400) {
+          this.toastr.error("email deja existe");
+
+        }else{
+          this.toastr.success("success");
+        }
+    }
+    );
+  }
 }

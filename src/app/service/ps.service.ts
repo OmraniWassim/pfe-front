@@ -24,4 +24,9 @@ export class PSService {
   public getManager(): Observable<manager[]> {
     return this.http.get<manager[]>(`${this.apiServerUrl}/get/${name}`);
   }
+
+  public addps(psM:ps): Observable<ps> {
+    return this.http.post<ps>(`${this.apiServerUrl}/add`,psM);
+  }
+
 }
