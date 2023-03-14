@@ -20,10 +20,7 @@ export class PSService {
   public deleteps(id:number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/delete/${id}`);
   }
-
-  public getManager(): Observable<manager[]> {
-    return this.http.get<manager[]>(`${this.apiServerUrl}/get/${name}`);
-  }
+  
 
   public addps(psM:ps): Observable<ps> {
     return this.http.post<ps>(`${this.apiServerUrl}/add`,psM);

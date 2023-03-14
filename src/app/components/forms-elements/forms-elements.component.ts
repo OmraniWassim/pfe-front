@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ps } from 'src/app/components/forms-elements/ps';
+import { AppUserService } from 'src/app/service/appUser.service';
 import { PSService } from 'src/app/service/ps.service';
 import { manager } from './manager';
 
@@ -13,18 +14,24 @@ import { manager } from './manager';
 })
 export class FormsElementsComponent implements OnInit {
 
+  selectedManager: manager;
+
+
   Managers: manager[]
   
   PS : ps[]
   psM : ps;
+  managers: manager[];
 
 
   constructor(private PsService:PSService,
-    private http:HttpClient,
+    private appuserservice:AppUserService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    
     this.loadps()
+    this.loadAppUsers()
       
   }
 
@@ -41,11 +48,7 @@ export class FormsElementsComponent implements OnInit {
     });
   }
  
-  private ps() {
-    this.PsService.getManager().subscribe((response: any) => {
-      this.Managers = response.map((ps: any) => ps.name);
-    });
-  }
+  
 
   public onAddpsM(addForm:NgForm):void{
     this.PsService.addps(addForm.value).subscribe((psM: ps) => {
@@ -65,4 +68,17 @@ export class FormsElementsComponent implements OnInit {
     }
     );
   }
+
+  loadAppUsers(): void {
+    this.appuserservice.getAppUsersByRole('PS_manager').subscribe(
+      (data: manager[]) => {
+        this.managers = data;
+        console.log(this.managers);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+  
 }

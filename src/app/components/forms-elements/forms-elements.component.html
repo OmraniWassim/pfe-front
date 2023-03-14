@@ -138,21 +138,20 @@
             <label for="manager">Manager</label>
             <input type="text" ngModel name="manager" class="form-control" id="manager" placeholder="manager" required>
          </div>
-         <div class="form-group">
-            <label for="rsponsableRH">Responsable RH</label>
-            <input type="text" ngModel name="rsponsableRH" class="form-control" id="rsponsableRH" placeholder="rsponsableRH" required>
-         </div>
+         
          <div class="form-group">
             <label for="organisation">organisation</label>
             <input type="text" ngModel name="organisation" class="form-control" id="organisation" placeholder="organisation" required>
          </div>
-           <div class="form-group">
-             <label>Role</label>
-             <select name="app_user_role" ngModel="RESPONSABLE" class="form-control" name="app_user_role" required>
-                
-             </select>
-         </div>
-           
+
+         
+         <div class="form-group">
+          <label>RESPONSABLE RH</label>
+          <select [(ngModel)]="selectedManager" name="manager">
+            <option *ngFor="let manager of managers" [ngValue]="manager">{{ manager.FirstName }} {{ manager.LastName }}</option>
+          </select>
+        </div>
+        
            <div class="modal-footer">
               <button   type="button" id="add-AppUser-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
              <button   [disabled]="addForm.invalid"  type="submit" class="btn btn-primary">Save changes</button>

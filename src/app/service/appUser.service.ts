@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {  Observable } from 'rxjs';
+import { manager } from '../components/forms-elements/manager';
 import { AppUser } from '../interface/appUser';
 
 
@@ -24,8 +25,13 @@ export class AppUserService {
   public updateAppUser(id:number,appUser:AppUser): Observable<void> {
     return this.http.put<void>(`${this.apiServerUrl}/registration/add/${id}`,appUser);
   }
+
   public deleteAppUser(id:number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/registration/delete/${id}`);
+  }
+
+  getAppUsersByRole(role: string): Observable<manager[]> {
+    return this.http.get<manager[]>(`${this.apiServerUrl}/registration/all/${role}`);
   }
 
 

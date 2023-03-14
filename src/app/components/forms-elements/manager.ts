@@ -1,4 +1,9 @@
 export interface manager{
-    "name":string
-
+    id :number;
+  FirstName:string;
+  LastName:string;
+  email:string;
+  password:string;
+  appUserRoles:string;
+  
 }
